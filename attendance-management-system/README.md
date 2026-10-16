@@ -243,13 +243,13 @@ disabled in production so a missing Atlas URI cannot silently lose data.
    Create a Firebase service account and add its JSON to Render as
    `FIREBASE_SERVICE_ACCOUNT_JSON`.
 6. In GitHub repository settings, enable **Pages → Build and deployment →
-   GitHub Actions**. Add the repository variable `API_BASE` with value
-   `https://<your-render-service>.onrender.com/api`; the included workflow will
-   publish `frontend-prod` automatically. Add the GitHub Pages site's exact
-   origin (for example `https://<owner>.github.io`) to `CORS_ORIGINS` and
-   redeploy the backend. The Firebase Web App config in
-   `frontend-prod/js/config.js` is public client configuration; never put the
-   service-account JSON there.
+   GitHub Actions**. Add repository variables `API_BASE`,
+   `FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`, and
+   `FIREBASE_APP_ID`. The included workflow injects these public web settings
+   and publishes `frontend-prod` when manually run. Add the GitHub Pages site's
+   exact origin (for example `https://<owner>.github.io`) to `CORS_ORIGINS`
+   and redeploy the backend. Never put the Firebase service-account JSON in
+   the frontend or GitHub variables.
 7. Confirm `https://<your-render-service>.onrender.com/api/health` returns
    JSON with `"status":"ok"`.
 

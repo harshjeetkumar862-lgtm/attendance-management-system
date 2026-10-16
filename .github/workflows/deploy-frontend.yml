@@ -21,20 +21,31 @@ jobs:
       - name: Configure frontend API
         env:
           API_BASE: ${{ vars.API_BASE }}
+          FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ vars.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+          FIREBASE_APP_ID: ${{ vars.FIREBASE_APP_ID }}
         run: |
-          if [ -z "$API_BASE" ]; then
-            echo "Set the repository variable API_BASE to the deployed backend URL ending in /api." >&2
+          if [ -z "$API_BASE" ] || [ -z "$FIREBASE_API_KEY" ] || [ -z "$FIREBASE_AUTH_DOMAIN" ] || [ -z "$FIREBASE_PROJECT_ID" ] || [ -z "$FIREBASE_APP_ID" ]; then
+            echo "Set API_BASE and the four Firebase web config variables in repository settings first." >&2
             exit 1
           fi
           node -e '
             const fs = require("node:fs");
             const file = "frontend-prod/js/config.js";
             const config = fs.readFileSync(file, "utf8");
-            const apiBase = JSON.stringify(process.env.API_BASE.replace(/\/+$/, ""));
-            fs.writeFileSync(file, config.replace(
-              "window.API_BASE = window.API_BASE || \u0027/api\u0027;",
-              `window.API_BASE = window.API_BASE || ${apiBase};`
-            ));
+            const replacements = new Map([
+              ["window.API_BASE = window.API_BASE || \u0027/api\u0027;", `window.API_BASE = window.API_BASE || ${JSON.stringify(process.env.API_BASE.replace(/\/+$/, ""))};`],
+              ["apiKey: \u0027\u0027,", `apiKey: ${JSON.stringify(process.env.FIREBASE_API_KEY)},`],
+              ["authDomain: \u0027\u0027,", `authDomain: ${JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN)},`],
+              ["projectId: \u0027\u0027,", `projectId: ${JSON.stringify(process.env.FIREBASE_PROJECT_ID)},`],
+              ["appId: \u0027\u0027,", `appId: ${JSON.stringify(process.env.FIREBASE_APP_ID)},`]
+            ]);
+            for (const [placeholder, value] of replacements) {
+              if (!config.includes(placeholder)) throw new Error(`Missing frontend config placeholder: ${placeholder}`);
+              config = config.replace(placeholder, value);
+            }
+            fs.writeFileSync(file, config);
           '
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
