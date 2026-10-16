@@ -1,5 +1,8 @@
 *
 !.gitignore
+!render.yaml
+!.github/
+!.github/**
 !attendance-management-system/
 !attendance-management-system/**
 !frontend-prod/

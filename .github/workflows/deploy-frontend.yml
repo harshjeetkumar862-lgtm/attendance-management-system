@@ -1,0 +1,59 @@
+name: Deploy frontend to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - frontend-prod/**
+      - .github/workflows/deploy-frontend.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Configure frontend API
+        env:
+          API_BASE: ${{ vars.API_BASE }}
+        run: |
+          if [ -z "$API_BASE" ]; then
+            echo "Set the repository variable API_BASE to the deployed backend URL ending in /api." >&2
+            exit 1
+          fi
+          node -e '
+            const fs = require("node:fs");
+            const file = "frontend-prod/js/config.js";
+            const config = fs.readFileSync(file, "utf8");
+            const apiBase = JSON.stringify(process.env.API_BASE.replace(/\/+$/, ""));
+            fs.writeFileSync(file, config.replace(
+              "window.API_BASE = window.API_BASE || \u0027/api\u0027;",
+              `window.API_BASE = window.API_BASE || ${apiBase};`
+            ));
+          '
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend-prod
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

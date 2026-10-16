@@ -3,7 +3,7 @@ services:
     name: attendance-management-api
     runtime: node
     plan: free
-    rootDir: backend
+    rootDir: attendance-management-system/backend
     buildCommand: npm ci --omit=dev
     startCommand: npm start
     healthCheckPath: /api/health

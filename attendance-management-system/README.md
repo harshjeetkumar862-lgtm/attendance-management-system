@@ -214,15 +214,16 @@ persistent data. Render's free web service may sleep when idle; the first
 request after sleeping can take longer. The in-memory database is deliberately
 disabled in production so a missing Atlas URI cannot silently lose data.
 
-1. Push the `attendance-management-system` project to a Git repository you
-   control. Do not commit `.env` or any credentials.
+1. Push this repository to a Git repository you control. The GitHub repository
+   includes `attendance-management-system/backend` and `frontend-prod`. Do not
+   commit `.env` or any credentials.
 2. Create a free MongoDB Atlas cluster and database user. Since Render free
    services do not provide fixed outbound IP addresses, allow Atlas network
    access from `0.0.0.0/0` and use a strong database-user password. Add the
    Atlas connection string as a Render secret; never put it in frontend code.
-3. In Render, create a **Blueprint** using this project's `render.yaml`, or
+3. In Render, create a **Blueprint** using the repository-root `render.yaml`, or
    create a Web Service manually with:
-   - Root Directory: `backend`
+   - Root Directory: `attendance-management-system/backend`
    - Build Command: `npm ci --omit=dev`
    - Start Command: `npm start`
    - Health Check Path: `/api/health`
@@ -241,12 +242,13 @@ disabled in production so a missing Atlas URI cannot silently lose data.
    `authDomain`, `projectId`, and `appId` into `frontend-prod/js/config.js`.
    Create a Firebase service account and add its JSON to Render as
    `FIREBASE_SERVICE_ACCOUNT_JSON`.
-6. Deploy `frontend-prod` on a static host. Ensure the folder is included in
-   the Git repository connected to that host. Set `window.API_BASE` in
-   `frontend-prod/js/config.js` to
-   `https://<your-render-service>.onrender.com/api`. Add the static site's
-   exact origin to `CORS_ORIGINS` and redeploy the backend. The Firebase Web
-   App config in that file is public client configuration; never put the
+6. In GitHub repository settings, enable **Pages → Build and deployment →
+   GitHub Actions**. Add the repository variable `API_BASE` with value
+   `https://<your-render-service>.onrender.com/api`; the included workflow will
+   publish `frontend-prod` automatically. Add the GitHub Pages site's exact
+   origin (for example `https://<owner>.github.io`) to `CORS_ORIGINS` and
+   redeploy the backend. The Firebase Web App config in
+   `frontend-prod/js/config.js` is public client configuration; never put the
    service-account JSON there.
 7. Confirm `https://<your-render-service>.onrender.com/api/health` returns
    JSON with `"status":"ok"`.
