@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration | Attendance Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/login.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <div class="auth-wrap">
+    <aside class="auth-aside">
+      <a href="index.html" class="brand">
+        <span class="logo">🎓</span>
+        <span>Apna College<small>Attendance Management System</small></span>
+      </a>
+      <div class="aside-body">
+        <h2>Create your student account.</h2>
+        <p>Register once with your mobile number and class details. After that, simply log in with an OTP.</p>
+        <ul class="aside-features">
+          <li><span class="tick">✓</span> View subject-wise attendance</li>
+          <li><span class="tick">✓</span> Track your overall percentage</li>
+          <li><span class="tick">✓</span> Download your personal report</li>
+        </ul>
+      </div>
+      <div class="aside-foot">© <span id="year"></span> Apna College</div>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-card">
+        <a href="login.html?role=student" class="back-link">← Back to login</a>
+        <h2>Student Registration</h2>
+        <p class="sub">Fill in your details to create an account</p>
+
+        <form id="registerForm" autocomplete="off">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input class="input" id="name" placeholder="e.g. Rahul Kumar" required />
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="mobile">Mobile Number</label>
+              <input class="input" id="mobile" inputmode="numeric" placeholder="10-digit mobile" required />
+            </div>
+            <div class="field">
+              <label for="rollNumber">Roll Number</label>
+              <input class="input" id="rollNumber" placeholder="e.g. 101" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input class="input" id="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field">
+            <label for="classId">Class / Semester</label>
+            <select class="input" id="classId" required>
+              <option value="">Loading classes…</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="studentId">Student ID <span class="hint">(optional — auto-generated if blank)</span></label>
+            <input class="input" id="studentId" placeholder="e.g. STU011" />
+          </div>
+          <button class="btn btn-primary btn-block" id="registerBtn" type="submit">Create Account</button>
+          <div class="link-row">
+            <span style="color:var(--muted)">Already registered?</span>
+            <a href="login.html?role=student">Login here</a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

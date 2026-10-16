@@ -1,0 +1,14 @@
+*
+!.gitignore
+!attendance-management-system/
+!attendance-management-system/**
+!frontend-prod/
+!frontend-prod/**
+
+**/node_modules/
+**/.env
+**/.env.*
+!**/.env.example
+**/*.log
+**/*.xlsx
+**/*.zip

@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: attendance-management-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_NAME
+        value: attendance_db
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: ORG_ADMIN_MOBILE
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false

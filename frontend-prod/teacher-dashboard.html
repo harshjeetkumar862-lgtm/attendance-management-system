@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard | Attendance Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <div class="sidebar-backdrop" onclick="toggleSidebar(false)"></div>
+
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="index.html" class="brand">
+        <span class="logo">🎓</span>
+        <span>Apna College<small>Teacher Portal</small></span>
+      </a>
+
+      <div class="nav-section">Main</div>
+      <nav class="side-nav">
+        <button data-view="overview" class="active"><span class="ic">📊</span> Dashboard</button>
+        <button data-view="profile"><span class="ic">👤</span> My Profile</button>
+        <button data-view="subjects"><span class="ic">📚</span> My Subjects</button>
+        <button data-view="classes"><span class="ic">🏫</span> My Classes</button>
+      </nav>
+
+      <div class="nav-section">Attendance</div>
+      <nav class="side-nav">
+        <button data-view="lectures"><span class="ic">🗓️</span> Lectures</button>
+        <button data-view="attendance"><span class="ic">✅</span> Mark Attendance</button>
+        <button data-view="reports"><span class="ic">📈</span> Reports &amp; Excel</button>
+      </nav>
+
+      <div class="side-foot">
+        <div class="user-chip">
+          <span class="avatar" id="sideAvatar">T</span>
+          <div>
+            <div class="uc-name" id="sideName">Teacher</div>
+            <div class="uc-role" id="sideRole">teacher</div>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-block btn-sm" onclick="logout()">⏻ Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="topbar">
+        <div style="display:flex;align-items:center;gap:14px">
+          <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+          <div>
+            <h1 id="pageTitle">Dashboard</h1>
+            <div class="crumb" id="pageCrumb">Welcome back, Teacher</div>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span class="badge" style="background:var(--primary-light);color:var(--primary)" id="topTeacherId">—</span>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <section id="view-overview" class="view">
+        <div class="stat-grid">
+          <div class="stat-card"><div class="sc-icon indigo">📚</div><div><div class="sc-value" id="statSubjects">—</div><div class="sc-label">My Subjects</div></div></div>
+          <div class="stat-card"><div class="sc-icon cyan">🏫</div><div><div class="sc-value" id="statClasses">—</div><div class="sc-label">My Classes</div></div></div>
+          <div class="stat-card"><div class="sc-icon green">🗓️</div><div><div class="sc-value" id="statLectures">—</div><div class="sc-label">Lectures Created</div></div></div>
+          <div class="stat-card"><div class="sc-icon amber">👨‍🎓</div><div><div class="sc-value" id="statStudents">—</div><div class="sc-label">Students</div></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>Recent Lectures</h3><p>Your latest created lectures</p></div>
+            <button class="btn btn-primary btn-sm" onclick="goTo('lectures')">+ New Lecture</button>
+          </div>
+          <div id="recentLectures"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Profile -->
+      <section id="view-profile" class="view hidden">
+        <div class="panel">
+          <div class="panel-head"><div><h3>My Profile</h3><p>Your faculty account details</p></div></div>
+          <div id="profileBody"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Subjects -->
+      <section id="view-subjects" class="view hidden">
+        <div class="panel">
+          <div class="panel-head"><div><h3>My Subjects</h3><p>Subjects assigned to you</p></div></div>
+          <div id="subjectsBody"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Classes -->
+      <section id="view-classes" class="view hidden">
+        <div class="panel">
+          <div class="panel-head"><div><h3>My Classes</h3><p>Classes you teach in</p></div></div>
+          <div id="classesBody"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Lectures -->
+      <section id="view-lectures" class="view hidden">
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>Create a Lecture</h3><p>Select your subject and start a new lecture</p></div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="lecSubject">Subject</label>
+              <select class="input" id="lecSubject"><option value="">Select subject</option></select>
+            </div>
+            <div class="field">
+              <label for="lecTopic">Topic / Title <span class="hint">(optional)</span></label>
+              <input class="input" id="lecTopic" placeholder="e.g. Introduction to OOP" />
+            </div>
+          </div>
+          <button class="btn btn-primary" id="createLectureBtn">＋ Create Lecture</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><div><h3>My Lectures</h3><p>All lectures you have created</p></div></div>
+          <div id="lecturesBody"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Mark Attendance -->
+      <section id="view-attendance" class="view hidden">
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>Mark / Update Attendance</h3><p>Choose a lecture, then mark each student Present or Absent</p></div>
+          </div>
+          <div class="field" style="max-width:420px">
+            <label for="attLecture">Select Lecture</label>
+            <select class="input" id="attLecture"><option value="">Select a lecture</option></select>
+          </div>
+          <div id="attendanceBody">
+            <div class="empty"><div class="e-icon">🗒️</div>Select a lecture to load the student list.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reports -->
+      <section id="view-reports" class="view hidden">
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>Attendance Report</h3><p>Subject-wise class report with Excel export</p></div>
+            <button class="btn btn-success btn-sm" id="exportExcelBtn" disabled>📤 Export Excel</button>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="repSubject">Subject</label>
+              <select class="input" id="repSubject"><option value="">Select subject</option></select>
+            </div>
+            <div class="field" style="display:flex;align-items:flex-end">
+              <button class="btn btn-primary" id="loadReportBtn">Generate Report</button>
+            </div>
+          </div>
+          <div id="reportBody"><div class="empty"><div class="e-icon">📈</div>Select a subject and generate the report.</div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <h3 id="modalTitle">Title</h3>
+      <p class="modal-sub" id="modalSub">Subtitle</p>
+      <div id="modalBody"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal('modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/teacher.js"></script>
+</body>
+</html>

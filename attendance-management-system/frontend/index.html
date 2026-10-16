@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attendance Management System | Apna College</title>
+  <meta name="description" content="A modern, role-based Attendance Management System for colleges — teachers manage subject-wise attendance and students track their overall attendance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <span class="logo">🎓</span>
+        <span>Apna College<small>Attendance Management System</small></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#roles">For Teachers &amp; Students</a>
+        <a href="#how">How it works</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-cta" id="navAuthCta">
+        <a class="btn btn-ghost btn-sm" href="login.html?role=teacher">Teacher Login</a>
+        <a class="btn btn-primary btn-sm" href="login.html?role=student">Student Login</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-copy">
+        <span class="hero-badge">✨ Smart • Secure • Subject-wise</span>
+        <h1>Attendance made <span class="grad">simple</span> for every teacher &amp; student.</h1>
+        <p class="lead">
+          A full-stack attendance platform where each faculty member manages attendance for their own
+          subject, students track their overall percentage, and reports export to Excel in one click.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="login.html?role=teacher">👩‍🏫 Teacher Login</a>
+          <a class="btn btn-ghost" href="login.html?role=student">👨‍🎓 Student Login</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong>Multi-Faculty</strong><span>Each subject, one teacher</span></div>
+          <div class="stat"><strong>OTP + JWT</strong><span>Passwordless secure login</span></div>
+          <div class="stat"><strong>Excel</strong><span>One-click reports</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="mock-card">
+          <div class="mock-head">
+            <div class="mock-title">BCA 3rd Sem · DBMS</div>
+            <span class="mock-pill">Live Attendance</span>
+          </div>
+          <div class="mock-row">
+            <div class="mock-name"><span class="avatar" style="background:#4f46e5">RK</span> Rahul Kumar</div>
+            <span class="tag present">Present</span>
+          </div>
+          <div class="mock-row">
+            <div class="mock-name"><span class="avatar" style="background:#0891b2">AK</span> Amit Kumar</div>
+            <span class="tag absent">Absent</span>
+          </div>
+          <div class="mock-row">
+            <div class="mock-name"><span class="avatar" style="background:#7c3aed">RK</span> Rohit Kumar</div>
+            <span class="tag present">Present</span>
+          </div>
+          <div class="mock-row">
+            <div class="mock-name"><span class="avatar" style="background:#db2777">NS</span> Neha Singh</div>
+            <span class="tag present">Present</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why this system</span>
+        <h2>Everything you need to run attendance</h2>
+        <p>Built for real classrooms with multiple teachers and subjects — without unnecessary complexity.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="feature">
+          <div class="icon">🧑‍🏫</div>
+          <h3>Separate Faculty Accounts</h3>
+          <p>Every teacher gets an independent account and manages only the attendance for the subjects assigned to them.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📚</div>
+          <h3>Subject-wise Attendance</h3>
+          <p>One class can have many teachers. Each subject keeps its own attendance, fully isolated from the others.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🗓️</div>
+          <h3>Simple Lecture Model</h3>
+          <p>Create a lecture, get the student list, and mark Present or Absent. No complicated date-wise setup.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📊</div>
+          <h3>Overall Percentage</h3>
+          <p>Students see subject-wise and a true overall percentage calculated from total present ÷ total lectures.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📤</div>
+          <h3>Excel Export</h3>
+          <p>Teachers export a full class report; students download their own personal attendance report as .xlsx.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🔐</div>
+          <h3>Secure &amp; Role-Based</h3>
+          <p>OTP + JWT authentication with strict access control — no teacher or student can see others' private data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roles -->
+  <section class="section" id="roles" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Two portals, one system</span>
+        <h2>Choose your login</h2>
+        <p>Secure passwordless login with a one-time password sent to your registered mobile number.</p>
+      </div>
+      <div class="login-cards">
+        <div class="login-card teacher">
+          <div class="lc-icon">👩‍🏫</div>
+          <h3>Teacher / Faculty</h3>
+          <p>Login with your Teacher ID or mobile number. Manage your subjects, create lectures, mark &amp; update attendance, and generate Excel reports.</p>
+          <a class="btn" href="login.html?role=teacher">Teacher Login →</a>
+        </div>
+        <div class="login-card student">
+          <div class="lc-icon">👨‍🎓</div>
+          <h3>Student</h3>
+          <p>Login with your registered mobile number. View your subject-wise attendance, overall percentage, and download your personal report.</p>
+          <a class="btn" href="login.html?role=student">Student Login →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section" id="how" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From login to report in four steps</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h4>Login with OTP</h4><p>Enter your Teacher ID / mobile and verify the one-time password.</p></div>
+        <div class="step"><div class="num">2</div><h4>Pick Class &amp; Subject</h4><p>Teachers select the class and subject they teach and create a lecture.</p></div>
+        <div class="step"><div class="num">3</div><h4>Mark Present / Absent</h4><p>Go through the student list and mark attendance with a single tap.</p></div>
+        <div class="step"><div class="num">4</div><h4>Generate Reports</h4><p>View percentages and export a clean Excel report instantly.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact" style="padding-top:0">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">Contact &amp; Help</span>
+          <h2 style="font-size:2rem;letter-spacing:-.02em;margin-top:10px">Need help getting started?</h2>
+          <p style="color:var(--muted);margin-top:14px">
+            Reach out to the college administration or the attendance system helpdesk for account
+            creation, OTP issues, or report queries.
+          </p>
+          <div class="contact-list mt-3">
+            <div class="contact-item">
+              <div class="ci-icon">📍</div>
+              <div><h4>Apna College</h4><p>Department of Computer Applications, Main Campus</p></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon">✉️</div>
+              <div><h4>helpdesk@apnacollege.edu</h4><p>For account &amp; login support</p></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon">📞</div>
+              <div><h4>+91 90000 00000</h4><p>Mon–Sat, 10:00 AM – 5:00 PM</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel" style="margin:0">
+          <div class="panel-head"><div><h3>Demo credentials</h3><p>Try the system instantly</p></div></div>
+          <table style="min-width:auto">
+            <thead><tr><th>Role</th><th>Login ID</th><th>Mobile</th></tr></thead>
+            <tbody>
+              <tr><td>Teacher</td><td><strong>TCH001</strong></td><td>9000000001</td></tr>
+              <tr><td>Teacher</td><td><strong>TCH002</strong></td><td>9000000002</td></tr>
+              <tr><td>Student</td><td>STU001</td><td><strong>9000000101</strong></td></tr>
+              <tr><td>Student</td><td>STU002</td><td><strong>9000000102</strong></td></tr>
+            </tbody>
+          </table>
+          <p class="mt-2" style="color:var(--muted);font-size:.84rem">In development mode the OTP is shown on screen and auto-filled.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <div class="brand"><span class="logo">🎓</span><span>Apna College<small>Attendance Management System</small></span></div>
+        <p style="color:#94a3b8;margin-top:16px;max-width:320px;font-size:.92rem">
+          A full-stack attendance platform built with Node.js, Express, MongoDB and a modern responsive frontend.
+        </p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#features">Features</a>
+        <a href="#roles">Login Portals</a>
+        <a href="#how">How it works</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Portals</h4>
+        <a href="login.html?role=teacher">Teacher Login</a>
+        <a href="login.html?role=student">Student Login</a>
+        <a href="register.html">Student Registration</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">© <span id="year"></span> Apna College · Attendance Management System. All rights reserved.</div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

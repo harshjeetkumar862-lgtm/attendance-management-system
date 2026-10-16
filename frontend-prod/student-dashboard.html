@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard | Attendance Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <div class="sidebar-backdrop" onclick="toggleSidebar(false)"></div>
+
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="index.html" class="brand">
+        <span class="logo">🎓</span>
+        <span>Apna College<small>Student Portal</small></span>
+      </a>
+
+      <div class="nav-section">Main</div>
+      <nav class="side-nav">
+        <button data-view="overview" class="active"><span class="ic">📊</span> Dashboard</button>
+        <button data-view="profile"><span class="ic">👤</span> My Profile</button>
+        <button data-view="attendance"><span class="ic">✅</span> My Attendance</button>
+        <button data-view="overall"><span class="ic">📈</span> Overall Attendance</button>
+        <button data-view="report"><span class="ic">📄</span> My Report</button>
+      </nav>
+
+      <div class="side-foot">
+        <div class="user-chip">
+          <span class="avatar" id="sideAvatar">S</span>
+          <div>
+            <div class="uc-name" id="sideName">Student</div>
+            <div class="uc-role" id="sideRole">student</div>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-block btn-sm" onclick="logout()">⏻ Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="topbar">
+        <div style="display:flex;align-items:center;gap:14px">
+          <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+          <div>
+            <h1 id="pageTitle">Dashboard</h1>
+            <div class="crumb" id="pageCrumb">Your attendance at a glance</div>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span class="badge" style="background:var(--primary-light);color:var(--primary)" id="topClass">—</span>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <section id="view-overview" class="view">
+        <div class="stat-grid">
+          <div class="stat-card"><div class="sc-icon indigo">📈</div><div><div class="sc-value" id="statOverall">—</div><div class="sc-label">Overall Attendance</div></div></div>
+          <div class="stat-card"><div class="sc-icon cyan">🗓️</div><div><div class="sc-value" id="statTotal">—</div><div class="sc-label">Total Lectures</div></div></div>
+          <div class="stat-card"><div class="sc-icon green">✅</div><div><div class="sc-value" id="statPresent">—</div><div class="sc-label">Present</div></div></div>
+          <div class="stat-card"><div class="sc-icon amber">❌</div><div><div class="sc-value" id="statAbsent">—</div><div class="sc-label">Absent</div></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>Subject-wise Attendance</h3><p>Your performance in each subject</p></div>
+            <button class="btn btn-success btn-sm" onclick="downloadReport()">📤 Download Report</button>
+          </div>
+          <div id="overviewSubjects"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Profile -->
+      <section id="view-profile" class="view hidden">
+        <div class="panel">
+          <div class="panel-head"><div><h3>My Profile</h3><p>Your student account details</p></div></div>
+          <div id="profileBody"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Attendance -->
+      <section id="view-attendance" class="view hidden">
+        <div class="panel">
+          <div class="panel-head"><div><h3>My Attendance</h3><p>Detailed subject-wise attendance</p></div></div>
+          <div id="attendanceBody"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Overall -->
+      <section id="view-overall" class="view hidden">
+        <div class="panel">
+          <div class="panel-head"><div><h3>Overall Attendance</h3><p>Combined across all subjects &amp; teachers</p></div></div>
+          <div id="overallBody"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- Report -->
+      <section id="view-report" class="view hidden">
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>My Attendance Report</h3><p>Download your personal report as an Excel file</p></div>
+            <button class="btn btn-success btn-sm" onclick="downloadReport()">📤 Download Excel</button>
+          </div>
+          <div id="reportBody"><div class="loading-block"><span class="spinner dark"></span> Loading…</div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/student.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Attendance Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/login.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <div class="auth-wrap">
+    <!-- Left brand panel -->
+    <aside class="auth-aside">
+      <a href="index.html" class="brand">
+        <span class="logo">🎓</span>
+        <span>Apna College<small>Attendance Management System</small></span>
+      </a>
+      <div class="aside-body">
+        <h2>Secure, passwordless attendance for everyone.</h2>
+        <p>Sign in securely with a one-time email link sent to your registered address.</p>
+        <ul class="aside-features">
+          <li><span class="tick">✓</span> Separate accounts for every faculty member</li>
+          <li><span class="tick">✓</span> Subject-wise attendance management</li>
+          <li><span class="tick">✓</span> Overall percentage for students</li>
+          <li><span class="tick">✓</span> One-click Excel reports</li>
+        </ul>
+      </div>
+      <div class="aside-foot">© <span id="year"></span> Apna College</div>
+    </aside>
+
+    <!-- Right form panel -->
+    <main class="auth-main">
+      <div class="auth-card">
+        <a href="index.html" class="back-link">← Back to home</a>
+        <h2>Welcome back 👋</h2>
+        <p class="sub">Sign in to your attendance account</p>
+
+        <div class="role-toggle">
+          <button type="button" data-role="teacher" class="active">👩‍🏫 Teacher</button>
+          <button type="button" data-role="student">👨‍🎓 Student</button>
+        </div>
+
+        <form id="loginForm" autocomplete="off">
+          <!-- Step 1 -->
+          <div id="step1">
+            <div class="field">
+              <label id="identifierLabel" for="identifier">Teacher email address</label>
+              <input class="input" id="identifier" name="identifier" type="email" autocomplete="email" placeholder="you@example.com" required />
+              <div class="hint mt-1" id="identifierHint">Use the email address registered with your account.</div>
+            </div>
+            <button class="btn btn-primary btn-block" id="sendLinkBtn" type="submit">Send sign-in link</button>
+            <div class="divider">New student?</div>
+            <a class="btn btn-ghost btn-block" href="register.html">Create a student account</a>
+          </div>
+
+          <!-- Step 2 -->
+          <div id="step2" class="hidden">
+            <div class="auth-note">
+              We sent a secure sign-in link to <strong id="emailTarget">—</strong>.
+              <button type="button" class="link-btn" id="changeBtn" style="margin-left:4px">Change</button>
+            </div>
+            <p class="auth-note">Open the link in this browser to finish signing in. If you opened it on another device, enter the same email address again.</p>
+            <div class="link-row">
+              <span style="color:var(--muted)">Didn't get the email?</span>
+              <button type="button" class="link-btn" id="resendLinkBtn">Resend link</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/script.js"></script>
+  <script type="module" src="js/firebase-auth.js"></script>
+  <script src="js/auth.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
